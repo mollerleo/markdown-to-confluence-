@@ -1,0 +1,50 @@
+name: Upload Documentation with Lovoo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+#  Ubuntu_start:
+ #   runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#      - name: Uploading README.md
+#        uses: lovoo/Github-action-confluence-sync@master
+#        with:
+#          from: './README.md'
+#          to: '458758' # The confluence page id where to write the output
+#          cloud: leomoller
+#          user: gbgleo@gmail.com
+#          token: ${{ secrets.CONFLUENCE_API_KEY }}
+
+#      - name: Uploading README.md
+#        uses: lovoo/Github-action-confluence-sync@master
+#        with:
+#          from: './documentation/page 1/index.md'
+#          to: '360463' # The confluence page id where to write the output
+#          cloud: leomoller
+#          user: gbgleo@gmail.com
+#          token: ${{ secrets.CONFLUENCE_API_KEY }}
+
+  markdown_to_confluence_job:
+    runs-on: ubuntu-latest
+    name: Converting Markdown to Confluence
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+#      - shell: bash
+#        run: |
+#          cd documentation/ && ls -la
+      - name: Conversion step
+        uses: TTengs/MarkdownToConfluence@v3
+        with:
+          fileslocation: 'documentation'
+          should_upload: true
+          confluence_url: 'https://leomoller.atlassian.net/wiki'
+          confluence_space_key: 'RT'
+          auth_username: ${{ secrets.CONFLUENCE_USER }}
+          auth_api_token: ${{ secrets.CONFLUENCE_API_KEY }}
+          is_preview: false
