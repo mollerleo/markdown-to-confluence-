@@ -44,7 +44,7 @@ jobs:
           fileslocation: 'documentation'
           should_upload: true
           confluence_url: 'https://leomoller.atlassian.net/wiki'
-          confluence_space_key: 'RT'
+          confluence_space_key: 'PREV'
           auth_username: ${{ secrets.CONFLUENCE_USER }}
           auth_api_token: ${{ secrets.CONFLUENCE_API_KEY }}
           is_preview: false
